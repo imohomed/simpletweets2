@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:weightSum="1">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@android:color/white"
+        android:background="?attr/colorPrimary">
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SimplyTweet"
+            android:textColor="@android:color/white"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            />
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Screen Name"
+        android:id="@+id/tvName"
+        android:layout_gravity="center_horizontal" />
+
+
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Tagline"
+            android:id="@+id/tvStatus"
+            android:layout_gravity="center_horizontal"
+            android:layout_above="@+id/tvFollowers"
+            android:layout_alignParentTop="true"
+            android:layout_alignEnd="@+id/tvFollowing"
+            android:layout_toEndOf="@+id/ivUserPhoto" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ivUserPhoto"
+            android:minHeight="60dp"
+            android:minWidth="60dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Following: "
+            android:id="@+id/tvFollowing"
+            android:layout_gravity="right"
+            android:layout_alignBottom="@+id/tvFollowers"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Followers: "
+            android:id="@+id/tvFollowers"
+            android:layout_below="@+id/ivUserPhoto"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
+
+
+
+    <View android:background="@color/colorPrimary" android:layout_width="match_parent" android:layout_height="1dp" />
+
+<FrameLayout
+    android:id="@+id/idFrame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"></FrameLayout>
+</LinearLayout>

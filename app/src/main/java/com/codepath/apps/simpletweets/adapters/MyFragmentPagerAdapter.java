@@ -3,6 +3,7 @@ package com.codepath.apps.simpletweets.adapters;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -42,8 +43,20 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
         Log.d(TAG, "Fragment " + position + " was created");
         if (position == 0) {
             TimelineFragment tf = new TimelineFragment();
+            Bundle args = new Bundle();
+            args.putString("type", "home");
+            tf.setArguments(args);
             return tf;
         }
+        else if (position == 1)
+        {
+            TimelineFragment tf = new TimelineFragment();
+            Bundle args = new Bundle();
+            args.putString("type", "mentions");
+            tf.setArguments(args);
+            return tf;
+        }
+
         MentionFragment mf = new MentionFragment();
         return mf;
     }

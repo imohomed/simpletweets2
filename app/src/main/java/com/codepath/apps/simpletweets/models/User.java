@@ -57,12 +57,18 @@ package com.codepath.apps.simpletweets.models;
 //        "screen_name": "oauth_dancer"
 //        },
 
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class User {
+public class User implements Parcelable {
     String name;
     String screenname;
+    int friends_count;
+    int followers_count;
 
     public long getId() {
         return id;
@@ -80,8 +86,16 @@ public class User {
         return screenname;
     }
 
+    public int getFriends_count() {return friends_count;}
+
+    public int getFollowers_count() {return  followers_count;}
+
     long id;
     String profileImageUrl;
+    String description;
+
+    public String getDescription() {return description;}
+    private static String TAG = "USER";
 
     public static User fromJSON(JSONObject json){
         User u = new User();
@@ -90,10 +104,53 @@ public class User {
             u.profileImageUrl = json.getString("profile_image_url");
             u.name = json.getString("screen_name");
             u.id = json.getLong("id");
-
+            u.friends_count = json.getInt("friends_count");
+            u.followers_count = json.getInt("followers_count");
+            u.description = json.getString("description");
+            Log.e(TAG,u.screenname + " " + u.profileImageUrl + " "  + u.name + " "  + u.id + " "  + u.friends_count + " "  + u.followers_count + " "
+                    + u.description);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return u;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.name);
+        dest.writeString(this.screenname);
+        dest.writeInt(this.friends_count);
+        dest.writeInt(this.followers_count);
+        dest.writeLong(this.id);
+        dest.writeString(this.profileImageUrl);
+        dest.writeString(this.description);
+    }
+
+    public User() {
+    }
+
+    protected User(Parcel in) {
+        this.name = in.readString();
+        this.screenname = in.readString();
+        this.friends_count = in.readInt();
+        this.followers_count = in.readInt();
+        this.id = in.readLong();
+        this.profileImageUrl = in.readString();
+        this.description = in.readString();
+    }
+
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+        public User createFromParcel(Parcel source) {
+            return new User(source);
+        }
+
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 }

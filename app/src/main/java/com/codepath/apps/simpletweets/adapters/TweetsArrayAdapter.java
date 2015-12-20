@@ -2,6 +2,7 @@ package com.codepath.apps.simpletweets.adapters;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -15,7 +16,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.apps.simpletweets.R;
+import com.codepath.apps.simpletweets.activities.ProfileActivity;
 import com.codepath.apps.simpletweets.models.Tweet;
+import com.codepath.apps.simpletweets.models.User;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
@@ -32,9 +35,11 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet>{
     private  TextView tvRetweet;
     private ImageView ivPhoto;
     private Transformation transformation;
+    private Context mContext;
 
     public TweetsArrayAdapter(Context c, List<Tweet> tweets){
         super(c, R.layout.item_tweet,tweets);
+        mContext = c;
         transformation = new RoundedTransformationBuilder()
                 .borderColor(Color.BLACK)
                 .borderWidthDp(0)
@@ -42,6 +47,26 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet>{
                 .oval(false)
                 .build();
 
+    }
+
+    private class CustomClickHandler implements View.OnClickListener
+    {
+        //private String name;
+        private Context mContext;
+        private User mUser;
+        public CustomClickHandler(Context theContext,User theUser)
+        {
+            mUser = theUser;
+            //name = theName;
+            mContext = theContext;
+        }
+
+        @Override
+        public void onClick(View v) {
+            Intent i = new Intent(mContext, ProfileActivity.class);
+            i.putExtra("user",mUser);
+            mContext.startActivity(i);
+        }
     }
 
     @Override
@@ -56,8 +81,11 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet>{
         tvHandle = (TextView)convertView.findViewById(R.id.tvHandle);
         tvRetweet = (TextView)convertView.findViewById(R.id.tvRetweet);
         ivPhoto = (ImageView)convertView.findViewById(R.id.ivPhoto);
-
         Tweet tweet = getItem(position);
+        String theName = tweet.getUser().getName();
+        ivPhoto.setOnClickListener(new CustomClickHandler(mContext,tweet.getUser()));
+
+
         tvText.setText(tweet.getText());
         tvScreenName.setText(tweet.getUser().getScreenname());
         tvScreenName.setTypeface(null, Typeface.BOLD);

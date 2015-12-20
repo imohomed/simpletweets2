@@ -1,5 +1,6 @@
 package com.codepath.apps.simpletweets.fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -38,8 +39,34 @@ public class TimelineFragment extends Fragment {
     private ArrayList<Tweet> tweets;
     private ListView lvTweets;
     private TweetsArrayAdapter aTweets;
+    private String type;
 //    private long last_downloaded_tweet = 1;
 
+    private OnItemSelectedListener listener;
+
+    // Define the events that the fragment will use to communicate
+    public interface OnItemSelectedListener {
+        // This can be any number of events to be sent to the activity
+        public void onUserSelected(String userHandle);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof OnItemSelectedListener) {
+            listener = (OnItemSelectedListener) activity;
+        } else {
+            throw new ClassCastException(activity.toString()
+                    + " must implement MyListFragment.OnItemSelectedListener");
+        }
+    }
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        type = getArguments().getString("type", "");
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -109,7 +136,7 @@ public class TimelineFragment extends Fragment {
 
     private void populateTimeline(long since_id,long max_id) {
         Log.d(TAG,"populateTimeline called");
-        client.getTimeline(since_id, max_id, new JsonHttpResponseHandler() {
+        JsonHttpResponseHandler rspHandler = new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 // super.onSuccess(statusCode, headers, response);
@@ -140,7 +167,15 @@ public class TimelineFragment extends Fragment {
                 Log.d(TAG, errorResponse.toString());
                 swipeContainer.setRefreshing(false);
             }
-        });
+        };
+
+        if (type.equals("home")) {
+            client.getTimeline(since_id, max_id, rspHandler);
+        }
+        else if (type.equals("mentions"))
+        {
+            client.getMentions(since_id, max_id, rspHandler);
+        }
     }
 
     public void integrateNewTweet(Tweet newTweet)
