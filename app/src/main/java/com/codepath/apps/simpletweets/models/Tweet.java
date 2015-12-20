@@ -147,11 +147,35 @@ public class Tweet implements Comparable {
     long id;
     User user;
     long created_at_ts;
+    boolean isRetweet;
+    String retweeter;
+    int retweetCount;
+
+    public boolean isRetweet()
+    {
+        return isRetweet;
+    }
+
+    public int getRetweetCount()
+    {
+        return retweetCount;
+    }
+
+    public String getRetweeter()
+    {
+        return retweeter;
+    }
 
     public static Tweet fromJSON(JSONObject json){
         Tweet t = new Tweet();
         try {
-            t.text = json.getString("text");
+            t.isRetweet = json.has("retweeted_status");
+            t.retweetCount = json.getInt("retweet_count");
+            if (t.isRetweet) {
+                t.retweeter = json.getJSONObject("user").getString("name");
+                json = json.getJSONObject("retweeted_status");
+            }
+                t.text = json.getString("text");
             t.created_at = json.getString("created_at");
             t.id = json.getLong("id");
             t.user = User.fromJSON(json.getJSONObject("user"));

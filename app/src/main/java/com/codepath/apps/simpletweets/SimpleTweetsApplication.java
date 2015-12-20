@@ -11,16 +11,16 @@ import android.content.Context;
  *     // use client to send requests to API
  *
  */
-public class TwitterClientApplication extends com.activeandroid.app.Application {
+public class SimpleTweetsApplication extends com.activeandroid.app.Application {
 	private static Context context;
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		TwitterClientApplication.context = this;
+		SimpleTweetsApplication.context = this;
 	}
 
 	public static TwitterClient getRestClient() {
-		return (TwitterClient) TwitterClient.getInstance(TwitterClient.class, TwitterClientApplication.context);
+		return (TwitterClient) TwitterClient.getInstance(TwitterClient.class, SimpleTweetsApplication.context);
 	}
 }

@@ -86,9 +86,9 @@ public class User {
     public static User fromJSON(JSONObject json){
         User u = new User();
         try {
-            u.name = json.getString("name");
+            u.screenname = json.getString("name");
             u.profileImageUrl = json.getString("profile_image_url");
-            u.screenname = json.getString("screen_name");
+            u.name = json.getString("screen_name");
             u.id = json.getLong("id");
 
         } catch (JSONException e) {

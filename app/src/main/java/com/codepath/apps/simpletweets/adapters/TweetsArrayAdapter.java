@@ -1,8 +1,9 @@
-package com.codepath.apps.simpletweets;
+package com.codepath.apps.simpletweets.adapters;
 
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.codepath.apps.simpletweets.R;
 import com.codepath.apps.simpletweets.models.Tweet;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
@@ -26,11 +28,13 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet>{
     private TextView tvText;
     private  TextView tvScreenName;
     private  TextView tvTime;
+    private  TextView tvHandle;
+    private  TextView tvRetweet;
     private ImageView ivPhoto;
     private Transformation transformation;
 
     public TweetsArrayAdapter(Context c, List<Tweet> tweets){
-        super(c,R.layout.item_tweet,tweets);
+        super(c, R.layout.item_tweet,tweets);
         transformation = new RoundedTransformationBuilder()
                 .borderColor(Color.BLACK)
                 .borderWidthDp(0)
@@ -49,12 +53,22 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet>{
         tvScreenName = (TextView)convertView.findViewById(R.id.tvScreenName);
         tvText = (TextView)convertView.findViewById(R.id.tvText);
         tvTime = (TextView)convertView.findViewById(R.id.tvTime);
+        tvHandle = (TextView)convertView.findViewById(R.id.tvHandle);
+        tvRetweet = (TextView)convertView.findViewById(R.id.tvRetweet);
         ivPhoto = (ImageView)convertView.findViewById(R.id.ivPhoto);
 
         Tweet tweet = getItem(position);
         tvText.setText(tweet.getText());
         tvScreenName.setText(tweet.getUser().getScreenname());
-
+        tvScreenName.setTypeface(null, Typeface.BOLD);
+        tvHandle.setText(" @" + tweet.getUser().getName());
+        if (tweet.isRetweet())
+        {
+            tvRetweet.setText(tweet.getRetweeter() + " retweeted (" + tweet.getRetweetCount() + " retweets)");
+        }
+        else {
+            tvRetweet.setVisibility(View.GONE);
+        }
 
 //        Log.e("NOW",now + "");
 //        Log.e("CREATED",mediaItem.createdTime);
