@@ -143,6 +143,19 @@ public class TimelineFragment extends Fragment {
         });
     }
 
+    public void integrateNewTweet(Tweet newTweet)
+    {
+        tweets.add(0,newTweet);
+
+        Set<Tweet> unique_tweets = new HashSet<Tweet>(tweets);
+        tweets.clear();
+        tweets.addAll(unique_tweets);
+        Collections.sort(tweets);
+        Log.d(TAG, "" + tweets.size());
+
+        aTweets.notifyDataSetChanged();
+    }
+
 
 
     /*@Override

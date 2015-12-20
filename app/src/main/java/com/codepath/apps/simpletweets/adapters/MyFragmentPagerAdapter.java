@@ -59,4 +59,9 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
         sb.setSpan(imageSpan, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return sb;
     }
+
+    private static String makeFragmentName(int viewId, int index)
+    {
+        return "android:switcher:" + viewId + ":" + index;
+    }
 }

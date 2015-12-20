@@ -15,6 +15,8 @@ import com.codepath.apps.simpletweets.R;
 import com.codepath.apps.simpletweets.SimpleTweetsApplication;
 import com.codepath.apps.simpletweets.TwitterClient;
 import com.codepath.apps.simpletweets.adapters.MyFragmentPagerAdapter;
+import com.codepath.apps.simpletweets.fragments.TimelineFragment;
+import com.codepath.apps.simpletweets.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
@@ -25,6 +27,7 @@ import org.json.JSONObject;
 public class TabbedActivity extends AppCompatActivity {
     private TwitterClient client;
     private String TAG = "TabbedActivity";
+    private ViewPager viewPager;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -59,7 +62,7 @@ public class TabbedActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         // Setup tabbed menu
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPager.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(),
                 TabbedActivity.this));
 
@@ -94,7 +97,10 @@ public class TabbedActivity extends AppCompatActivity {
 //                Log.d(TAG, "" + tweets.get(tweets.size()-1).getId());
 //                        Collections.sort(tweets);
                         // The following code adds new tweet to existing timeline array
-//                        Tweet newTweet = Tweet.fromJSON(response);
+                        Tweet newTweet = Tweet.fromJSON(response);
+                        TimelineFragment tf = (TimelineFragment)getSupportFragmentManager().findFragmentByTag("android:switcher:" + viewPager.getId() + ":0");
+
+                        tf.integrateNewTweet(newTweet);
 //                        tweets.add(0,newTweet);
 //
 //
