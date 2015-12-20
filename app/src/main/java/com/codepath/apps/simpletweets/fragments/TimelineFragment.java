@@ -40,26 +40,15 @@ public class TimelineFragment extends Fragment {
     private TweetsArrayAdapter aTweets;
 //    private long last_downloaded_tweet = 1;
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.content_timeline, container, false);
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-        lvTweets = (ListView)view.findViewById(R.id.lvTweets);
-        tweets = new ArrayList<>();
         mContext = getContext(); //container.getContext();
-        aTweets = new TweetsArrayAdapter(mContext, tweets);
+        aTweets = new TweetsArrayAdapter(getActivity(), tweets);
         lvTweets.setAdapter(aTweets);
         client = SimpleTweetsApplication.getRestClient();
-//        last_downloaded_tweet = 1;
-        populateTimeline(1, -1);
 
         lvTweets.setOnScrollListener(new EndlessScrollListener() {
             @Override
@@ -73,7 +62,6 @@ public class TimelineFragment extends Fragment {
             }
         });
 
-        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
 
 
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -90,6 +78,31 @@ public class TimelineFragment extends Fragment {
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
+
+        populateTimeline(1, -1);
+
+
+    }
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.content_timeline, container, false);
+
+
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
+        lvTweets = (ListView)view.findViewById(R.id.lvTweets);
+        tweets = new ArrayList<>();
+        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+
+//        last_downloaded_tweet = 1;
+
+
 
         return view;
     }

@@ -13,6 +13,7 @@ import android.text.style.ImageSpan;
 import android.util.Log;
 
 import com.codepath.apps.simpletweets.R;
+import com.codepath.apps.simpletweets.fragments.MentionFragment;
 import com.codepath.apps.simpletweets.fragments.TimelineFragment;
 
 public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
@@ -39,8 +40,12 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         Log.d(TAG, "Fragment " + position + " was created");
-        TimelineFragment tf = new TimelineFragment();
-        return tf;
+        if (position == 0) {
+            TimelineFragment tf = new TimelineFragment();
+            return tf;
+        }
+        MentionFragment mf = new MentionFragment();
+        return mf;
     }
 
     @Override
