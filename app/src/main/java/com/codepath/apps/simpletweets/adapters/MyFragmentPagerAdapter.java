@@ -24,7 +24,7 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
 
     private int[] imageResId = {
             R.drawable.home24,
-            R.drawable.user24
+            R.drawable.users24
     };
 
     public MyFragmentPagerAdapter(FragmentManager fm, Context context) {

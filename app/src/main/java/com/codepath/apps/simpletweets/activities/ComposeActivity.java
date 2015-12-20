@@ -3,6 +3,7 @@ package com.codepath.apps.simpletweets.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -19,7 +20,11 @@ public class ComposeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose);
-        getSupportActionBar().setTitle("Post Tweet");
+        //getSupportActionBar().setTitle("Post Tweet");
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        mTitle.setText("Post a Tweet");
+        //
         etTweet = (EditText) findViewById(R.id.etTweet);
         tvNumChars = (TextView) findViewById(R.id.tvNumChars);
 
