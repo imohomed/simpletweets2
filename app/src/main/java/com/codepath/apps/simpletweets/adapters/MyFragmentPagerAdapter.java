@@ -14,7 +14,6 @@ import android.text.style.ImageSpan;
 import android.util.Log;
 
 import com.codepath.apps.simpletweets.R;
-import com.codepath.apps.simpletweets.fragments.MentionFragment;
 import com.codepath.apps.simpletweets.fragments.TimelineFragment;
 
 public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
@@ -57,8 +56,9 @@ public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
             return tf;
         }
 
-        MentionFragment mf = new MentionFragment();
-        return mf;
+        //MentionFragment mf = new MentionFragment();
+        //return mf;
+        return null;
     }
 
     @Override
