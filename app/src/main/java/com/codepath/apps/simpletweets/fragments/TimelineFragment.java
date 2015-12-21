@@ -17,6 +17,7 @@ import com.codepath.apps.simpletweets.SimpleTweetsApplication;
 import com.codepath.apps.simpletweets.TwitterClient;
 import com.codepath.apps.simpletweets.adapters.TweetsArrayAdapter;
 import com.codepath.apps.simpletweets.models.Tweet;
+import com.codepath.apps.simpletweets.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
@@ -40,6 +41,7 @@ public class TimelineFragment extends Fragment {
     private ListView lvTweets;
     private TweetsArrayAdapter aTweets;
     private String type;
+    private User mUser;
 //    private long last_downloaded_tweet = 1;
 
     private OnItemSelectedListener listener;
@@ -66,6 +68,7 @@ public class TimelineFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         type = getArguments().getString("type", "");
+        mUser = getArguments().getParcelable("user");
     }
 
     @Override
@@ -176,7 +179,7 @@ public class TimelineFragment extends Fragment {
             client.getMentions(since_id, max_id, rspHandler);
         } else if (type.equals("user"))
         {
-            client.getUserTimeline(since_id, max_id, rspHandler);
+            client.getUserTimeline(mUser,since_id, max_id, rspHandler);
         }
     }
 

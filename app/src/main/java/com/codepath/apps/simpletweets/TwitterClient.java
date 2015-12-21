@@ -2,6 +2,7 @@ package com.codepath.apps.simpletweets;
 
 import android.content.Context;
 
+import com.codepath.apps.simpletweets.models.User;
 import com.codepath.oauth.OAuthBaseClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -64,11 +65,12 @@ public class TwitterClient extends OAuthBaseClient {
 		client.get(apiUrl, params, handler);
 	}
 
-	public void getUserTimeline(long since_id,long max_id,AsyncHttpResponseHandler handler) {
+	public void getUserTimeline(User theUser,long since_id,long max_id,AsyncHttpResponseHandler handler) {
 		String apiUrl = getApiUrl("statuses/user_timeline.json");
 		// Can specify query string params directly or through RequestParams.
 		RequestParams params = new RequestParams();
 		params.put("count", 25);
+		params.put("user_id",theUser.getId());
 		params.put("since_id", since_id);
 		if (max_id > -1)
 			params.put("max_id", max_id);

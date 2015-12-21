@@ -17,7 +17,7 @@ The following **required** functionality is completed:
 * [X] User can **click on the profile image** in any tweet to see **another user's** profile.
  * [X] User can see picture, tagline, # of followers, # of following, and tweets of clicked user.
  * [X] Profile view includes that user's timeline
-* [ X User can [infinitely paginate](http://guides.codepath.com/android/Endless-Scrolling-with-AdapterViews-and-RecyclerView) any of these timelines (home, mentions, user) by scrolling to the bottom
+* [X] User can [infinitely paginate](http://guides.codepath.com/android/Endless-Scrolling-with-AdapterViews-and-RecyclerView) any of these timelines (home, mentions, user) by scrolling to the bottom
 
 The following **optional** features are implemented:
 
@@ -44,7 +44,7 @@ The following **additional** features are implemented:
 Here's a walkthrough of implemented user stories:
 
 <img src='SimpleTweetsWk3WalkthroughV1.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
+<img src='SimpleTweetsWk3WalkthroughV2.gif' title='Video Walkthrough 2' width='' alt='Video Walkthrough' />
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes

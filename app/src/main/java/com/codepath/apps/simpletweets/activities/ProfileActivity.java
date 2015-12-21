@@ -55,6 +55,7 @@ public class ProfileActivity extends AppCompatActivity implements TimelineFragme
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         TimelineFragment tf = new TimelineFragment();
         Bundle args = new Bundle();
+        args.putParcelable("user",mUser);
         args.putString("type", "user");
         tf.setArguments(args);
 // Replace the contents of the container with the new fragment
