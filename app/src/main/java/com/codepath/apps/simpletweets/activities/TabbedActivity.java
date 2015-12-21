@@ -25,7 +25,8 @@ import org.json.JSONObject;
 /**
  * Created by i.mohomed on 12/20/15.
  */
-public class TabbedActivity extends AppCompatActivity implements TimelineFragment.OnItemSelectedListener {
+public class TabbedActivity extends AppCompatActivity implements TimelineFragment.OnItemSelectedListener
+{
     private TwitterClient client;
     private String TAG = "TabbedActivity";
     private ViewPager viewPager;
@@ -33,7 +34,7 @@ public class TabbedActivity extends AppCompatActivity implements TimelineFragmen
 
     public void onUserSelected(String userHandle)
     {
-        Toast.makeText(this, "User selected:" + userHandle, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "User selected:" + userHandle, Toast.LENGTH_SHORT).show();
     }
 
     @Override

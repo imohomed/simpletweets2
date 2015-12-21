@@ -171,10 +171,12 @@ public class TimelineFragment extends Fragment {
 
         if (type.equals("home")) {
             client.getTimeline(since_id, max_id, rspHandler);
-        }
-        else if (type.equals("mentions"))
+        } else if (type.equals("mentions"))
         {
             client.getMentions(since_id, max_id, rspHandler);
+        } else if (type.equals("user"))
+        {
+            client.getUserTimeline(since_id, max_id, rspHandler);
         }
     }
 
