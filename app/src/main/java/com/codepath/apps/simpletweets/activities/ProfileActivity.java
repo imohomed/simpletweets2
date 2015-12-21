@@ -21,6 +21,7 @@ public class ProfileActivity extends AppCompatActivity implements TimelineFragme
 
     private User mUser;
 
+    // Function is blank on purpose. Not being used at the moment.
     public void onUserSelected(String userHandle)
     {
         //Toast.makeText(this, "User selected:" + userHandle, Toast.LENGTH_SHORT).show();

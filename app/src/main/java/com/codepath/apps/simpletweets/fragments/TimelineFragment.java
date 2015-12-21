@@ -44,8 +44,10 @@ public class TimelineFragment extends Fragment {
     private User mUser;
 //    private long last_downloaded_tweet = 1;
 
+    // The listener and associated interface are not actually used at this point
     private OnItemSelectedListener listener;
 
+    // Interface not used
     // Define the events that the fragment will use to communicate
     public interface OnItemSelectedListener {
         // This can be any number of events to be sent to the activity

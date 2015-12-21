@@ -32,6 +32,7 @@ public class TabbedActivity extends AppCompatActivity implements TimelineFragmen
     private ViewPager viewPager;
     private User mUser;
 
+    // This function is blank on purpose.
     public void onUserSelected(String userHandle)
     {
         //Toast.makeText(this, "User selected:" + userHandle, Toast.LENGTH_SHORT).show();
