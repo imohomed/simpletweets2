@@ -17,6 +17,7 @@ import com.codepath.apps.simpletweets.TwitterClient;
 import com.codepath.apps.simpletweets.adapters.MyFragmentPagerAdapter;
 import com.codepath.apps.simpletweets.fragments.TimelineFragment;
 import com.codepath.apps.simpletweets.models.Tweet;
+import com.codepath.apps.simpletweets.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.apache.http.Header;
@@ -28,6 +29,7 @@ public class TabbedActivity extends AppCompatActivity implements TimelineFragmen
     private TwitterClient client;
     private String TAG = "TabbedActivity";
     private ViewPager viewPager;
+    private User mUser;
 
     public void onUserSelected(String userHandle)
     {
@@ -48,7 +50,10 @@ public class TabbedActivity extends AppCompatActivity implements TimelineFragmen
     }
 
     public void onProfileAction(MenuItem item) {
-        Toast.makeText(this, "Profile pressed", Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(this, ProfileActivity.class);
+        i.putExtra("user",mUser);
+        startActivity(i);
+        //Toast.makeText(this, "Profile pressed", Toast.LENGTH_SHORT).show();
         //Intent i = new Intent(this,ComposeActivity.class);
         //startActivityForResult(i, 1);
 
@@ -74,6 +79,19 @@ public class TabbedActivity extends AppCompatActivity implements TimelineFragmen
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        client.getUser(new JsonHttpResponseHandler(){
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    mUser = User.fromJSON(response);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Log.e(TAG,"HTTP request for authenticated client failed");
+            }
+        });
     }
 
      @Override
